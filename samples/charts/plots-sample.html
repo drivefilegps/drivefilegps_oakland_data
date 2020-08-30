@@ -1,0 +1,601 @@
+<!doctype html>
+
+<html>
+
+<head>
+	<title>Plot Sample</title>
+	<script src="../../dist/Chart.min.js"></script>
+	<script src="../utils.js"></script>
+	<script src="http://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	
+	<style>
+	body {
+		background-color: #000000;
+		color: #ffffff;
+		font-family: "Roboto", Helvetica, Arial, sans-serif;
+		font-size: 16px;
+		line-height: 1.5;
+		padding-bottom: 1.5rem;
+		padding-top: 0.1rem;
+		padding-left: 4rem;
+		padding-right: 4rem;
+	}
+	
+	h1, h2, h3{
+		font-weight: 300;
+	}
+	
+	h6{
+		margin-top: 2rem;
+		margin-bottom: 2rem;
+		padding-left: 4rem;
+		padding-right: 4rem;
+	}
+	
+	h4{
+		font-weight: 300;
+		padding-left: 4rem;
+		padding-right: 4rem;
+	}
+	
+	hr {
+		border-top: 1px solid #000030;
+		margin-top: 1rem;
+	}	
+	.align-center {
+		text-align: center;
+	}	
+	.column {
+	  float: left;
+	  width: 30%;
+	  padding: 1px;
+	}
+	
+	h5 {
+		margin-top: 2rem;
+		padding-left: 4rem;
+		padding-right: 4rem;
+	}	
+	.align-center {
+		text-align: center;
+	}	
+	.column {
+	  float: left;
+	  width: 30%;
+	  padding: 1px;
+	}
+	
+	button.btn1{
+		display:inline-block;
+		padding:0.3em 1.2em;
+		margin:0 0.1em 0.1em 0;
+		border:0.16em solid rgba(255,22,22,1);
+		border-radius:2em;
+		box-sizing: border-box;
+		text-decoration:none;
+		font-family:'Roboto',sans-serif;
+		font-weight:300;
+		color:#FFFFFF;
+		text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+		text-align:center;
+		transition: all 0.2s;
+		width: 100%;
+	}
+	
+	button.btn1:hover{
+		border-color: rgba(255,22,22,0);
+		color:#FF1616;
+	}
+	@media all and (max-width:30em){
+		button.btn1{
+			display:block;
+			margin:0.2em auto;
+		}
+	}
+	
+	select.ddselect{
+		display:inline-block;
+		padding:0.3em 1.2em;
+		margin:0 0.1em 0.1em 0;
+		border:0.16em solid rgba(255,22,22,1);
+		border-radius:2em;
+		box-sizing: border-box;
+		text-decoration:none;
+		font-family:'Roboto',sans-serif;
+		font-weight:300;
+		color:#FFFFFF;
+		text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+		text-align:center;
+		transition: all 0.2s;
+		width: 100%;
+	}
+	
+	p{
+		text-align: center;
+		margin-left: 0rem;
+		clear: both;
+	}
+	
+	.col1 {
+		width: 30%;
+		float: left;
+		padding: 1px;
+		margin-top: 50px;
+	}
+	
+	.col2 {
+		width: 50%;
+		float: left;
+		padding: 1px;
+	}
+	.col3 {
+		width: 42%;
+		float: left;
+		padding: 2px;
+		margin: 40px;
+	}
+	
+	#canvas-holder1, #canvas-holder2, #canvas-holder3, #canvas-holder4 {
+		height: 280px;
+		width: 100%;
+		padding-top: 2rem;
+	}
+	
+	#canv{
+		height: 300px;
+		width: 615px;
+		border-top: 0px solid #9a4ef1;
+		border-left: 0px solid #9a4ef1;
+		border-bottom: 0px solid #9a4ef1;
+		border-right: 0px solid #9a4ef1;
+		margin-top: 1.5rem;
+		margin-left: 5.8rem;
+	}
+	
+	canvas {
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+	</style>
+</head>
+
+<body>
+
+	<div class="row">
+	
+		<div class="col2">
+			
+			<img src="drivefileLOGOBIG.png" class="center_blog_post" alt="Blog Image 3" style = "width:400px;height:200px;">
+						
+		</div>
+	
+		<div class="col1">
+		
+			<h6>
+				<button class = "btn1" id="randomizeData" style="background-color:#000000">Reset Data</button>
+			</h6>				
+			<h6>
+				<select id="ddselect" onchange = "ddlselect();" style="background-color:#000000">
+				<option> -- Select Beat -- </option>
+				<option>01X</option>
+				<option>02X</option>
+				<option>02Y</option>
+				<option>03X</option>
+				<option>03Y</option>
+				<option>04X</option>
+				<option>05X</option>
+				<option>05Y</option>
+				<option>06X</option>
+				<option>07X</option>
+				<option>08X</option>
+				<option>09X</option>
+				<option>10X</option>
+				<option>10Y</option>
+				<option>11X</option>
+				<option>12X</option>
+				<option>12Y</option>
+				<option>13X</option>
+				<option>13Y</option>
+				<option>13Z</option>
+				<option>14X</option>
+				<option>14Y</option>
+				<option>15X</option>
+				<option>16X</option>
+				<option>16Y</option>
+				<option>17X</option>
+				<option>17Y</option>
+				<option>18X</option>
+				<option>18Y</option>
+				<option>19X</option>
+				<option>20X</option>
+				<option>21X</option>
+				<option>21Y</option>
+				<option>22X</option>
+				<option>22Y</option>
+				<option>23X</option>
+				<option>24X</option>
+				<option>24Y</option>
+				<option>25X</option>
+				<option>25Y</option>
+				<option>26X</option>
+				<option>26Y</option>
+				<option>27X</option>
+				<option>27Y</option>
+				<option>28X</option>
+				<option>29X</option>
+				<option>30X</option>
+				<option>30Y</option>
+				<option>31X</option>
+				<option>31Y</option>
+				<option>31Z</option>
+				<option>32X</option>
+				<option>32Y</option>
+				<option>33X</option>
+				<option>34X</option>
+				<option>35X</option>
+				<option>35Y</option>
+				</select>
+			</h6>
+			<h6>
+				<button class = "btn1" id="connectToSever" style="background-color:#000000">Plot Data</button>
+			</h6>			
+			
+		</div>
+		
+	</div>
+	
+	<p></p>
+	
+	
+		<div class="row">		
+			<div class="col3">
+				<div id="canvas-holder1" style="width:100%">
+					<canvas id="bar-chart1"></canvas>				
+				<!-- <h3 class="align-center">Plot1</h3> -->
+				</div>
+			</div>
+			
+			<div class="col3">
+				<div id="canvas-holder2" style="width:100%">
+					<canvas id="bar-chart2"></canvas>
+				<!-- <h3 class="align-center">Plot2</h3> -->
+				</div>
+			</div>
+			
+		</div>
+	
+	
+	<script>
+		var displayText;
+		function ddlselect(){
+		
+			var d = document.getElementById("ddselect");
+			displayText = d.options[d.selectedIndex].text;
+		}
+	
+		var randomScalingFactor = function() {
+			return Math.round(Math.random() * 0.0);
+		};		
+		
+		var color = Chart.helpers.color;
+		var horizontalBarChartData1 = {
+			labels: ['Black', 'White', 'Latinx', 'Asian', 'Others'],
+			datasets: [{
+				label: 'Vehicular Stop Rates',
+				backgroundColor: color("#ff1616").alpha(1.0).rgbString(),
+				borderColor: "#ff1616",
+				borderWidth: 1,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				]
+			}, {
+				label: 'Vehicular Arrest Rates',
+				backgroundColor: color("#ffffff").alpha(1.0).rgbString(),
+				borderColor: "#ffffff",
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				]
+			}]
+
+		};
+		
+		var horizontalBarChartData2 = {
+			labels: ['Black', 'White', 'Latinx', 'Asian', 'Others'],
+			datasets: [{
+				label: 'Pedestrian Stop Rates',
+				backgroundColor: color("#ff1616").alpha(1.0).rgbString(),
+				borderColor: "#ff1616",
+				borderWidth: 1,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				]
+			}, {
+				label: 'Pedestrian Arrest Rates',
+				backgroundColor: color("#ffffff").alpha(1.0).rgbString(),
+				borderColor: "#ffffff",
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				]
+			}]
+
+		};
+		
+		const url = 'https://api.wheretheiss.at/v1/satellites/25544';
+		
+		window.onload = function() {
+			window.myHorizontalBar1 = new Chart(document.getElementById('bar-chart1').getContext('2d'), {
+				type: 'bar',
+				data: horizontalBarChartData1,
+				options: {
+					scales:{
+							yAxes: [{
+								display: false //this will remove all the x-axis grid lines
+							}]
+						},
+					// Elements options apply to all of the options unless overridden in a dataset
+					// In this case, we are setting the border of each horizontal bar to be 2px wide
+					elements: {
+						rectangle: {
+							borderWidth: 2,
+						}
+					},
+					responsive: true,
+					legend: {
+						position: 'bottom',
+					},
+					title: {
+						display: false,
+						text: 'blank'
+					}
+				}
+			});
+			
+			window.myHorizontalBar2 = new Chart(document.getElementById('bar-chart2').getContext('2d'), {
+				type: 'bar',
+				data: horizontalBarChartData2,
+				options: {
+					scales:{
+							yAxes: [{
+								display: false //this will remove all the x-axis grid lines
+							}]
+						},
+					// Elements options apply to all of the options unless overridden in a dataset
+					// In this case, we are setting the border of each horizontal bar to be 2px wide
+					elements: {
+						rectangle: {
+							borderWidth: 2,
+						}
+					},
+					responsive: true,
+					legend: {
+						position: 'bottom',
+					},
+					title: {
+						display: false,
+						text: 'blank'
+					}
+				}
+			});
+			
+		};
+
+		document.getElementById('randomizeData').addEventListener('click', function() {
+			
+			var zero = Math.random() < 0.2 ? true : false;
+			horizontalBarChartData1.datasets.forEach(function(dataset) {
+				dataset.data = dataset.data.map(function() {
+					return zero ? 0.0 : randomScalingFactor();
+				});
+
+			});
+			horizontalBarChartData2.datasets.forEach(function(dataset) {
+				dataset.data = dataset.data.map(function() {
+					return zero ? 0.0 : randomScalingFactor();
+				});
+
+			});
+			
+			window.myHorizontalBar1.update();
+			window.myHorizontalBar2.update();
+			
+		});
+
+		var colorNames = Object.keys(window.chartColors);
+		
+	/*	document.getElementById('connectToSever').addEventListener('click', function(){
+		
+			async function getISS(){
+				const response = await fetch(url);
+				const data = await response.json();	
+				document.getElementById('lat').textContent = data.latitude;
+				
+
+			
+			}
+			getISS();
+
+		
+		
+		}); */
+		
+		var BSV, WSV, HSV, ASV, OSV, BAV, WAV, HAV, AAV, OAV, BSP, WSP, HSP, ASP, OSP, BAP, WAP, HAP, AAP, OAP;
+		$(document).ready(function(){
+			$('#connectToSever').click(function(){
+				$.ajax({
+					url:"oakland_traffic_stop_data.csv",
+					dataType:"text",
+					success:function(data){
+						var employee_data = data.split(/\r?\n|\r/);
+						for(var count = 0; count < employee_data.length; count++){
+							var cell_data = employee_data[count].split(",");
+							for(var cell_count = 0; cell_count < cell_data.length; cell_count++){
+								if (count != 0){
+									console.log(displayText)
+									if(cell_data[0] == displayText){
+										console.log(cell_data[cell_count])
+										BSV = cell_data[3];
+										WSV = cell_data[4];
+										HSV = cell_data[5];
+										ASV = cell_data[6];
+										OSV = cell_data[7];
+										BAV = cell_data[8];
+										WAV = cell_data[9];
+										HAV = cell_data[10];
+										AAV = cell_data[11];
+										OAV = cell_data[12];
+										BSP = cell_data[13];
+										WSP = cell_data[14];
+										HSP = cell_data[15];
+										ASP = cell_data[16];
+										OSP = cell_data[17];
+										BAP = cell_data[18];
+										WAP = cell_data[19];
+										HAP = cell_data[20];
+										AAP = cell_data[21];
+										OAP = cell_data[22];
+										delete horizontalBarChartData1;
+										horizontalBarChartData1 = {
+										labels: ['Black', 'White', 'Latinx', 'Asian', 'Others'],
+										datasets: [{
+											label: 'Vehicular Stop Rates',
+											backgroundColor: color("#ff1616").alpha(1.0).rgbString(),
+											borderColor: "#ff1616",
+											borderWidth: 1,
+											data: [
+												BSV,
+												WSV,
+												HSV,
+												ASV,
+												OSV
+											]
+										}, {
+											label: 'Vehicular Arrest Rates',
+											backgroundColor: color("#ffffff").alpha(1.0).rgbString(),
+											borderColor: "#ffffff",
+											data: [
+												BAV,
+												WAV,
+												HAV,
+												AAV,
+												OAV
+											]
+										}]
+
+									};
+									delete window.myHorizontalBar1;
+									window.myHorizontalBar1 = new Chart(document.getElementById('bar-chart1').getContext('2d'), {
+											type: 'bar',
+											data: horizontalBarChartData1,
+											options: {
+												scales:{
+														yAxes: [{
+															display: true //this will remove all the x-axis grid lines
+														}]
+													},
+												// Elements options apply to all of the options unless overridden in a dataset
+												// In this case, we are setting the border of each horizontal bar to be 2px wide
+												elements: {
+													rectangle: {
+														borderWidth: 2,
+													}
+												},
+												responsive: true,
+												legend: {
+													position: 'bottom',
+												},
+												title: {
+													display: false,
+													text: 'blank'
+												}
+											}
+										});
+										delete horizontalBarChartData2;
+										horizontalBarChartData2 = {
+										labels: ['Black', 'White', 'Latinx', 'Asian', 'Others'],
+										datasets: [{
+											label: 'Pedestrian Stop Rates',
+											backgroundColor: color("#ff1616").alpha(1.0).rgbString(),
+											borderColor: "#ff1616",
+											borderWidth: 1,
+											data: [
+												BSP,
+												WSP,
+												HSP,
+												ASP,
+												OSP
+											]
+										}, {
+											label: 'Pedestrian Arrest Rates',
+											backgroundColor: color("#ffffff").alpha(1.0).rgbString(),
+											borderColor: "#ffffff",
+											data: [
+												BAP,
+												WAP,
+												HAP,
+												AAP,
+												OAP
+											]
+										}]
+
+									};
+									delete window.myHorizontalBar2;
+									window.myHorizontalBar2 = new Chart(document.getElementById('bar-chart2').getContext('2d'), {
+											type: 'bar',
+											data: horizontalBarChartData2,
+											options: {
+												scales:{
+														yAxes: [{
+															display: true //this will remove all the x-axis grid lines
+														}]
+													},
+												// Elements options apply to all of the options unless overridden in a dataset
+												// In this case, we are setting the border of each horizontal bar to be 2px wide
+												elements: {
+													rectangle: {
+														borderWidth: 2,
+													}
+												},
+												responsive: true,
+												legend: {
+													position: 'bottom',
+												},
+												title: {
+													display: false,
+													text: 'blank'
+												}
+											}
+										});
+									}
+								}
+							}
+						}
+					}
+				});
+			});
+		});
+
+	</script>
+</body>
+
+</html>

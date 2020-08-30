@@ -1,0 +1,450 @@
+<!doctype html>
+
+<html>
+
+<head>
+	<title>App Omics</title>
+	<script src="../../dist/Chart.min.js"></script>
+	<script src="../utils.js"></script>
+	<script src="http://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"></script>
+	<style>
+	body {
+		background-color: #000030;
+		color: #ffffff;
+		font-family: "Roboto", Helvetica, Arial, sans-serif;
+		font-size: 16px;
+		line-height: 1.5;
+		padding-bottom: 1.5rem;
+		padding-top: 0.1rem;
+		padding-left: 4rem;
+		padding-right: 4rem;
+	}
+	
+	h1, h2, h3{
+		font-weight: 300;
+	}
+	
+	h6{
+		margin-top: 2rem;
+		margin-bottom: 2rem;
+		padding-left: 4rem;
+		padding-right: 4rem;
+	}
+	
+	h4{
+		font-weight: 300;
+		padding-left: 4rem;
+		padding-right: 4rem;
+	}
+	
+	hr {
+		border-top: 1px solid #000030;
+		margin-top: 1rem;
+	}	
+	.align-center {
+		text-align: center;
+	}	
+	.column {
+	  float: left;
+	  width: 30%;
+	  padding: 1px;
+	}
+	
+	h5 {
+		margin-top: 2rem;
+		padding-left: 4rem;
+		padding-right: 4rem;
+	}	
+	.align-center {
+		text-align: center;
+	}	
+	.column {
+	  float: left;
+	  width: 30%;
+	  padding: 1px;
+	}
+	
+	button.btn1{
+		display:inline-block;
+		padding:0.3em 1.2em;
+		margin:0 0.1em 0.1em 0;
+		border:0.16em solid rgba(255,255,255,0);
+		border-radius:2em;
+		box-sizing: border-box;
+		text-decoration:none;
+		font-family:'Roboto',sans-serif;
+		font-weight:300;
+		color:#FFFFFF;
+		text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+		text-align:center;
+		transition: all 0.2s;
+		width: 100%;
+	}
+	
+	button.btn1:hover{
+		border-color: rgba(255,255,255,1);
+	}
+	@media all and (max-width:30em){
+		button.btn1{
+			display:block;
+			margin:0.2em auto;
+		}
+	}
+	
+	p{
+		text-align: center;
+		margin-left: 0rem;
+		clear: both;
+	}
+	
+	.col1 {
+		width: 30%;
+		float: left;
+		padding: 1px;
+	}
+	
+	.col2 {
+		width: 50%;
+		float: left;
+		padding: 1px;
+	}
+	
+	#canvas-holder1, #canvas-holder2, #canvas-holder3 {
+		height: 280px;
+		width: 100%;
+		padding-top: 2rem;
+	}
+	
+	#canv{
+		height: 300px;
+		width: 615px;
+		border-top: 2px solid #9a4ef1;
+		border-left: 2px solid #9a4ef1;
+		border-bottom: 2px solid #9a4ef1;
+		border-right: 2px solid #9a4ef1;
+		margin-top: 1.5rem;
+		margin-left: 5.8rem;
+	}
+	
+	canvas {
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+	</style>
+</head>
+
+<body>
+
+	<div class="row">
+	
+		<div class="col1">
+			<p>VOYAGE 56</p>
+			
+			<h6>
+				<button class = "btn1" id="randomizeData" style="background-color:#4e9af1">Randomize Data</button>
+			</h6>
+			<h6>
+				<button class = "btn1" id="connectToSever" style="background-color:#9a4ef1">Connect To Server</button>
+			</h6>
+			<h6>
+				<button class = "btn1" id="uploadImage" style="background-color:#f14ebd">Upload Image</button>
+			</h6>
+			<h6>
+				<button class = "btn1" id="runAnalysis" style="background-color:#9a4ef1">Run Analysis</button>
+			</h6>	
+			
+			<h4>Prediction: <span id="lat"></span></h4>
+			
+			
+		</div>
+		
+		<div class="col2">
+			<input type = "file" id = "real-file" hidden = "hidden"
+			accept="image/*">
+			
+			<canvas id="canv"></canvas>
+						
+		</div>
+		
+	</div>
+	
+	<p></p>
+	
+	
+		<div class="row">	
+			<div class="column">
+				<div id="canvas-holder1" style="width:100%">
+					<canvas id="doughnut-chart"></canvas>				
+				<!-- <h3 class="align-center">Plot1</h3> -->
+				</div>
+			</div>
+			
+			<div class="column">
+				<div id="canvas-holder2" style="width:100%">
+					<canvas id="line-chart"></canvas>
+				<!-- <h3 class="align-center">Plot2</h3> -->
+				</div>
+			</div>
+			
+			<div class="column">
+				<div id="canvas-holder3" style="width:100%">
+					<canvas id="bar-chart"></canvas>
+				<!-- <h3 class="align-center">Plot3</h3> -->
+				</div>
+			</div>
+		</div>
+	
+	
+	
+	<script>
+		var randomScalingFactor = function() {
+			return Math.round(Math.random() * 100);
+		};
+
+		var config_doughnut = {
+			type: 'doughnut',
+			data: {
+				datasets: [{
+					data: [
+						0,
+						100,
+					],
+					backgroundColor: [
+						window.chartColors.yellow,
+						window.chartColors.green,
+					],
+					label: 'Dataset 1'
+				}],
+				labels: [
+					'Death',
+					'Survival',
+				]
+			},
+			options: {
+				responsive: true,
+				legend: {
+					display: false
+				},
+				animation: {
+					animateScale: true,
+					animateRotate: true
+				}
+			}
+		};
+		
+		var config_line = {
+			type: 'line',
+			data: {
+				labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+				datasets: [{
+					label: 'My First dataset',
+					borderColor: window.chartColors.red,
+					backgroundColor: window.chartColors.red,
+					data: [
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor()
+					],
+				}, {
+					label: 'My Second dataset',
+					borderColor: window.chartColors.blue,
+					backgroundColor: window.chartColors.blue,
+					data: [
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor()
+					],
+				}, {
+					label: 'My Third dataset',
+					borderColor: window.chartColors.green,
+					backgroundColor: window.chartColors.green,
+					data: [
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor()
+					],
+				}, {
+					label: 'My Third dataset',
+					borderColor: window.chartColors.yellow,
+					backgroundColor: window.chartColors.yellow,
+					data: [
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor()
+					],
+				}]
+			},
+			options: {
+				responsive: true,
+				tooltips: {
+					mode: 'index',
+				},
+				hover: {
+					mode: 'index'
+				},
+				scales: {
+					xAxes: [{
+						scaleLabel: {
+							display: true,
+							labelString: 'Month'
+						}
+					}],
+					yAxes: [{
+						stacked: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Value'
+						}
+					}]
+				}
+			}
+		};
+		
+		
+		var color = Chart.helpers.color;
+		var horizontalBarChartData = {
+			labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+			datasets: [{
+				label: 'Dataset 1',
+				backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+				borderColor: window.chartColors.red,
+				borderWidth: 1,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				]
+			}, {
+				label: 'Dataset 2',
+				backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+				borderColor: window.chartColors.blue,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				]
+			}]
+
+		};
+		
+		const url = 'https://api.wheretheiss.at/v1/satellites/25544';
+		
+		window.onload = function() {
+			var ctx = document.getElementById('doughnut-chart').getContext('2d');
+			window.myDoughnut = new Chart(ctx, config_doughnut);
+			window.myLine = new Chart(document.getElementById('line-chart').getContext('2d'), config_line);
+			window.myHorizontalBar = new Chart(document.getElementById('bar-chart').getContext('2d'), {
+				type: 'horizontalBar',
+				data: horizontalBarChartData,
+				options: {
+					// Elements options apply to all of the options unless overridden in a dataset
+					// In this case, we are setting the border of each horizontal bar to be 2px wide
+					elements: {
+						rectangle: {
+							borderWidth: 2,
+						}
+					},
+					responsive: true,
+					legend: {
+						position: 'right',
+					},
+					title: {
+						display: false,
+						text: 'blank'
+					}
+				}
+			});
+			
+		};
+
+		document.getElementById('randomizeData').addEventListener('click', function() {
+			config_doughnut.data.datasets.forEach(function(dataset) {
+				dataset.data = dataset.data.map(function() {
+					return randomScalingFactor();
+				});
+			});
+			
+			config_line.data.datasets.forEach(function(dataset) {
+				dataset.data = dataset.data.map(function() {
+					return randomScalingFactor();
+				});
+
+			});
+			
+			var zero = Math.random() < 0.2 ? true : false;
+			horizontalBarChartData.datasets.forEach(function(dataset) {
+				dataset.data = dataset.data.map(function() {
+					return zero ? 0.0 : randomScalingFactor();
+				});
+
+			});
+
+			window.myDoughnut.update();
+			
+			window.myLine.update();
+			
+			window.myHorizontalBar.update();
+		});
+
+		var colorNames = Object.keys(window.chartColors);
+		
+		document.getElementById('connectToSever').addEventListener('click', function(){
+		
+			async function getISS(){
+				const response = await fetch(url);
+				const data = await response.json();	
+				document.getElementById('lat').textContent = data.latitude;
+				
+				config_doughnut.data.datasets[0].data[0] = data.latitude;
+				config_doughnut.data.datasets[0].data[1] = 100 - data.latitude;
+
+				window.myDoughnut.update();
+			
+			}
+			getISS();				
+		});
+		
+		const realFileBtn = document.getElementById("real-file");
+		const customBtn = document.getElementById("uploadImage");
+		
+		customBtn.addEventListener("click", function(){
+			realFileBtn.click();
+		});
+		
+		realFileBtn.addEventListener("change", function(){
+			var imgcanvas = document.getElementById("canv");
+			var image = new SimpleImage(realFileBtn);
+			image.drawTo(imgcanvas);
+			document.getElementById("canv").width = "615";
+			document.getElementById("canv").height = "300";
+		});
+
+	</script>
+</body>
+
+</html>
