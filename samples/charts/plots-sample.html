@@ -10,6 +10,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      
 	
 	
 	<style>
@@ -27,6 +28,11 @@
 	
 	h1, h2, h3{
 		font-weight: 300;
+	}
+	
+	h2{
+		color: #000000;
+		font-size: 15px;
 	}
 	
 	h6{
@@ -268,6 +274,108 @@
 			</div>
 			
 		</div>
+	
+	<style>
+	  #map {
+		height: 400px;
+		width = 100%;
+	  }
+	</style>
+	
+	<div id="map"></div>
+	<script>
+
+	function initMap(){
+	  var options = {
+		zoom:11.5,
+		center:{lat:37.79832501,lng:-122.27223049999999}
+		}
+		
+	  var map = new google.maps.Map(document.getElementById('map'), options);
+	  
+	addMarker({lat:37.79832501,lng:-122.27223049999999},'<h2>01X<h2>')
+	addMarker({lat:37.80552105,lng:-122.2866993},'<h2>02X<h2>')
+	addMarker({lat:37.80641613,lng:-122.29726409999998},'<h2>02Y<h2>')
+	addMarker({lat:37.80087857,lng:-122.27003700000002},'<h2>03X<h2>')
+	addMarker({lat:37.80239275,lng:-122.2751274},'<h2>03Y<h2>')
+	addMarker({lat:37.80840825,lng:-122.26995},'<h2>04X<h2>')
+	addMarker({lat:37.81240269,lng:-122.28124869999999},'<h2>05X<h2>')
+	addMarker({lat:37.81412061,lng:-122.2926258},'<h2>05Y<h2>')
+	addMarker({lat:37.82096746,lng:-122.2716719},'<h2>06X<h2>')
+	addMarker({lat:37.82055088,lng:-122.2795055},'<h2>07X<h2>')
+	addMarker({lat:37.8172383,lng:-122.2638986},'<h2>08X<h2>')
+	addMarker({lat:37.82547677,lng:-122.2531807},'<h2>09X<h2>')
+	addMarker({lat:37.83955554,lng:-122.27670379999999},'<h2>10X<h2>')
+	addMarker({lat:37.83635185,lng:-122.27142260000001},'<h2>10Y<h2>')
+	addMarker({lat:37.84005008,lng:-122.2664679},'<h2>11X<h2>')
+	addMarker({lat:37.8340065,lng:-122.2611625},'<h2>12X<h2>')
+	addMarker({lat:37.84225574,lng:-122.25516299999998},'<h2>12Y<h2>')
+	addMarker({lat:37.83787559,lng:-122.23329709999999},'<h2>13X<h2>')
+	addMarker({lat:37.83883564,lng:-122.21824679999999},'<h2>13Y<h2>')
+	addMarker({lat:37.82997354,lng:-122.21118670000001},'<h2>13Z<h2>')
+	addMarker({lat:37.81026468,lng:-122.25526699999999},'<h2>14X<h2>')
+	addMarker({lat:37.81264545,lng:-122.2478132},'<h2>14Y<h2>')
+	addMarker({lat:37.79927758,lng:-122.2426245},'<h2>15X<h2>')
+	addMarker({lat:37.80800391,lng:-122.2355787},'<h2>16X<h2>')
+	addMarker({lat:37.80624813,lng:-122.22404540000001},'<h2>16Y<h2>')
+	addMarker({lat:37.79435053,lng:-122.24480449999999},'<h2>17X<h2>')
+	addMarker({lat:37.80050175,lng:-122.2383837},'<h2>17Y<h2>')
+	addMarker({lat:37.79017043,lng:-122.23934720000001},'<h2>18X<h2>')
+	addMarker({lat:37.79380935,lng:-122.23340120000002},'<h2>18Y<h2>')
+	addMarker({lat:37.78856694,lng:-122.24496200000002},'<h2>19X<h2>')
+	addMarker({lat:37.78211501,lng:-122.23086609999999},'<h2>20X<h2>')
+	addMarker({lat:37.78828626,lng:-122.2284034},'<h2>21X<h2>')
+	addMarker({lat:37.78922516,lng:-122.21871540000001},'<h2>21Y<h2>')
+	addMarker({lat:37.80079622,lng:-122.2149525},'<h2>22X<h2>')
+	addMarker({lat:37.79711318,lng:-122.2001851},'<h2>22Y<h2>')
+	addMarker({lat:37.77566185,lng:-122.22019990000001},'<h2>23X<h2>')
+	addMarker({lat:37.781513000000004,lng:-122.2136257},'<h2>24X<h2>')
+	addMarker({lat:37.78711669,lng:-122.2053447},'<h2>24Y<h2>')
+	addMarker({lat:37.78918815,lng:-122.19350449999999},'<h2>25X<h2>')
+	addMarker({lat:37.7826749,lng:-122.1707925},'<h2>25Y<h2>')
+	addMarker({lat:37.76608694,lng:-122.20922859999999},'<h2>26X<h2>')
+	addMarker({lat:37.75977907,lng:-122.19532849999999},'<h2>26Y<h2>')
+	addMarker({lat:37.772248600000005,lng:-122.20642360000001},'<h2>27X<h2>')
+	addMarker({lat:37.76766083,lng:-122.198952},'<h2>27Y<h2>')
+	addMarker({lat:37.7812169,lng:-122.194225},'<h2>28X<h2>')
+	addMarker({lat:37.77254693,lng:-122.1848129},'<h2>29X<h2>')
+	addMarker({lat:37.76208058,lng:-122.1811331},'<h2>30X<h2>')
+	addMarker({lat:37.76593961,lng:-122.17239440000002},'<h2>30Y<h2>')
+	addMarker({lat:37.74381557,lng:-122.1973687},'<h2>31X<h2>')
+	addMarker({lat:37.73856102,lng:-122.19069440000001},'<h2>31Y<h2>')
+	addMarker({lat:37.73403878,lng:-122.1806149},'<h2>31Z<h2>')
+	addMarker({lat:37.74322411,lng:-122.1707048},'<h2>32X<h2>')
+	addMarker({lat:37.745886299999995,lng:-122.15858459999998},'<h2>32Y<h2>')
+	addMarker({lat:37.74923873,lng:-122.17836809999999},'<h2>33X<h2>')
+	addMarker({lat:37.75142226,lng:-122.17126599999999},'<h2>34X<h2>')
+	addMarker({lat:37.75595287,lng:-122.1626409},'<h2>35X<h2>')
+	addMarker({lat:37.76029269,lng:-122.120139},'<h2>35Y<h2>')
+	  
+	  function addMarker(coords, content){
+		var marker = new google.maps.Marker({
+			position:coords,
+			map:map
+		});
+		var infoWindow = new google.maps.InfoWindow({content:content});
+		marker.addListener('mouseover',function(){
+		infoWindow.open(map, marker);
+			});
+		marker.addListener('mouseout',function(){
+		infoWindow.close(map, marker);
+			});
+			
+		var circle = new google.maps.Circle({
+		  map: map,
+		  radius: 500,    // 10 miles in metres
+		  fillColor: '#AA0000'
+		});
+		circle.bindTo('center', marker, 'position');
+		}
+	}
+	</script>
+	<script defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJ_gY3ejrKp7QrkTN2SF5QpYc630xGE_Q&callback=initMap">
+	</script>
 	
 	
 	<script>
